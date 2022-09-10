@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h> 
+
+typedef struct ponto{
+    int x, y; //cordenadas do ponto 
+    struct ponto * proximo; //ponteiro para proximo elemento/musica
+    
+}t_ponto;//para não precisar digitar "struct ponto * proximo toda vez"
+
+
+int main (){
+    t_ponto * inicio_ponto; //marcar o inicio da lista e ponteiro
+    t_ponto * proximo_ponto; //apontar pro proximo item
+    int resp; //resposta do usuario se deseja continuar o processo
+    
+    inicio_ponto = (t_ponto *)malloc(sizeof(t_ponto));//alocação de memoria
+    proximo_ponto = inicio_ponto; //apontar para o inicio
+    
+    while(1)
+    {
+        printf("digite x:   "); //usuario digitar o valor de x
+        scanf("%d", &proximo_ponto->x); //função de entrada de dados
+        printf("Digite y: ");
+        scanf("%d", &proximo_ponto->y);
+        printf("Deseja continuar? <1> SIM <outro valor> NÃO: ");//pergunto ao usuario se deseja continuar
+        scanf("%d", &resp); //pego a resposta
+        if(resp == 1){ //caso for sim, alocar memoria para o proximo elemento
+            proximo_ponto->proximo = (t_ponto *)malloc(sizeof(t_ponto)); //alocação da memoria para o proximo valor
+            proximo_ponto = proximo_ponto->proximo; //aqui aponto que as variaveis apontam pro mesmo local 
+        }
+        else
+            break;
+    }
+    printf("\n"); //pular linha
+    proximo_ponto->proximo = NULL; //Para saber quando a lista chegou ao fim
+    proximo_ponto = inicio_ponto; //começar desde o inicio_ponto
+    while(proximo_ponto != NULL) { //Enquanto o ponto for diferente de NULL, ira mostrar as variaveis
+        printf("x %d, y: %d\n", proximo_ponto->x, proximo_ponto->y); //exibindo as variaveis
+        proximo_ponto = proximo_ponto->proximo; //apontar pro proximo ponto
+    }
+    
+    
+    return 0;
+}
+
+
+
+
